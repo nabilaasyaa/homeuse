@@ -1,0 +1,14 @@
+<?php
+include 'db.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $type = $_POST['type'];
+    $description = $_POST['description'];
+
+    $sql = "INSERT INTO messages (type, description) VALUES (:type, :description)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['type' => $type, 'description' => $description]);
+
+    header('Location: index.php'); // Redirect setelah menambah data
+}
+?>
